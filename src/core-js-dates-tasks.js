@@ -249,16 +249,20 @@ function getNextFridayThe13th(date) {
 
   resultDate.setDate(13);
 
-  while (true) {
-    if (resultDate.getDay() === 5 && resultDate.getDate() === 13) {
-      if (resultDate > date) {
-        return resultDate;
-      }
+  if (resultDate <= date) {
+    resultDate.setMonth(resultDate.getMonth() + 1);
+    resultDate.setDate(13);
+  }
+
+  for (let i = 0; i < 100; i += 1) {
+    if (resultDate.getDay() === 5) {
+      return new Date(resultDate);
     }
 
     resultDate.setMonth(resultDate.getMonth() + 1);
     resultDate.setDate(13);
   }
+  throw new Error('Friday the 13th not found');
 }
 
 /**
